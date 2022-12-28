@@ -1,0 +1,34 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+enableFeaturePreview('VERSION_CATALOGS')
+dependencyResolutionManagement {
+    // 配置只能在当前文件配置三方依赖仓库，否则编译异常退出
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+    }
+
+    versionCatalogs{
+        create('buildVersion'){
+            version('compileSdk', '33')
+            version('minSdk', '26')
+            version('targetSdk', '33')
+            version('versionCode', '1')
+            version('versionName', "1.0.0")
+        }
+        create("libs"){
+            from(files("./projectLibs.version.toml"))
+        }
+    }
+}
+rootProject.name = "Pokemon"
+include ':app'
+include ':common'
+include ':resource'

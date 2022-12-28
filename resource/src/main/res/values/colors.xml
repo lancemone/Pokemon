@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="color_primary">@color/color_tian_qing</color>
+    <color name="color_primary_variant">@color/color_shi_qing</color>
+    <color name="color_secondary">@color/color_tao_hong</color>
+    <color name="color_secondary_variant">@color/color_hai_tang</color>
+
+    <color name="color_tian_qing">#C3E0E7</color>
+    <color name="color_shi_qing">#1E7FA0</color>
+    <color name="color_c3e0d6">#C3E0D6</color>
+    <color name="color_a8d6f2">#A8D6F2</color>
+    <color name="color_8ed1d3">#8ED1D3</color>
+    <color name="color_hai_tang">#D05667</color>
+    <color name="color_tao_hong">#E7767F</color>
+    <color name="color_ce1c24">#CE1C24</color>
+
+    <color name="default_text_black_color">@color/black</color>
+    <color name="color_baaaaa">#BAAAAA</color>
+    <color name="color_e3dbdb">#E3DBDB</color>
+</resources>

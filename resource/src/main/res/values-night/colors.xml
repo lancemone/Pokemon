@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">@color/color_tian_qing</color>
+    <color name="color_primary_variant">@color/color_shi_qing</color>
+    <color name="color_secondary">@color/color_tao_hong</color>
+    <color name="color_secondary_variant">@color/color_hai_tang</color>
+
+    <color name="default_text_black_color">@color/white</color>
+</resources>

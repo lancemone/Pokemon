@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pokemon</string>
+    <string name="default_empty_data_text">一不小心迷路了，当前没有找到内容 >_&lt;</string>
+    <string name="default_network_error_text">此路不通，请检查网络情况后重试^_^</string>
+    <string name="loading">加载中…</string>
+</resources>
