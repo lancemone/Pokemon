@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="border_color" format="color"/>
+    <attr name="border_width" format="dimension"/>
+    <attr name="corner_radius" format="dimension" />
+
+    <declare-styleable name="CircleOrFilletImageView">
+        <attr name="image_shape" format="enum">
+            <enum name="circle" value="0"/>
+            <enum name="fillet" value="1"/>
+        </attr>
+        <attr name="is_cover_image" format="boolean"/>
+        <attr name="border_color"/>
+        <attr name="border_width"/>
+        <attr name="inner_border_width" format="dimension"/>
+        <attr name="inner_border_color" format="color"/>
+        <attr name="mask_color" format="color"/>
+        <attr name="corner_radius"/>
+        <attr name="corner_top_left_radius" format="dimension" />
+        <attr name="corner_top_right_radius" format="dimension" />
+        <attr name="corner_bottom_left_radius" format="dimension" />
+        <attr name="corner_bottom_right_radius" format="dimension" />
+    </declare-styleable>
+</resources>
