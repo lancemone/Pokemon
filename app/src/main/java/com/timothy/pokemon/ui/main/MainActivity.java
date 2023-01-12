@@ -28,6 +28,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 ARouterManager.toTraditionColorActivity(getBaseContext());
             }
         });
+//        mDataBinding.splitterImage.setImageResource(com.timothy.resource.R.mipmap.sample_liutijianbian_1);
     }
 
     @Override

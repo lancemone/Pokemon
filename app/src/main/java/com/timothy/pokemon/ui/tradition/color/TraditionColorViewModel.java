@@ -39,6 +39,7 @@ public class TraditionColorViewModel extends BaseViewModel {
                         if (xmlResourceParser.getEventType() == XmlPullParser.START_TAG){
                             if ("ListItem".equals(xmlResourceParser.getName())){
                                 mTraditionColors.addAll(getXmlItems(xmlResourceParser));
+                                Log.d("motao", "after getXmlItems mTraditionColors size=" + mTraditionColors.size());
                             }
                         }
                         xmlResourceParser.next();
@@ -79,7 +80,6 @@ public class TraditionColorViewModel extends BaseViewModel {
             if (parser.getEventType() == XmlPullParser.START_TAG){
                 if ("item".equals(parser.getName())){
                     TraditionColorData data = new TraditionColorData();
-                    data.colorHex = parser.nextText();
                     StringBuilder builder = new StringBuilder("item: ");
                     for (int i = 0; i < parser.getAttributeCount(); i++){
                         String tagName = parser.getAttributeName(i);
@@ -91,8 +91,10 @@ public class TraditionColorViewModel extends BaseViewModel {
                         }
                         builder.append(tagName).append("=").append(value).append(";");
                     }
+                    String colorText = parser.nextText();
+                    data.colorHex = colorText;
                     colorDataList.add(data);
-                    builder.append("colorHex=").append(parser.nextText());
+                    builder.append("colorHex=").append(colorText);
                     Log.d("motao", builder.toString());
                 }
             }
