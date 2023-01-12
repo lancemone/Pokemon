@@ -13,17 +13,14 @@
 
         <com.timothy.common.components.SplitterImageView
             android:id="@+id/splitter_image"
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="300dp"
+            app:division_width="3dp"
+            app:division_color="@color/black"
             app:srcCompat="@mipmap/sample_liutijianbian_1"
-            app:border_width="2dp"
-            app:border_color="@color/black"
-            app:border_start_color="@color/color_primary_variant"
-            app:border_end_color="@color/color_primary"
             android:layout_marginTop="5dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_marginHorizontal="5dp"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"

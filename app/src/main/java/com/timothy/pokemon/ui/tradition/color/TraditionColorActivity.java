@@ -29,14 +29,14 @@ public class TraditionColorActivity extends BaseMVVMActivity<ActivityTraditionCo
         mViewModel.getTraditionColorList().observe(this, new Observer<List<TraditionColorData>>() {
             @Override
             public void onChanged(List<TraditionColorData> traditionColorData) {
-                if (traditionColorData.isEmpty()){
-                    mDataBinding.tvWithColor.setVisibility(View.GONE);
-                }else {
-                    TraditionColorData colorData = traditionColorData.get(0);
-                    Log.d("motao", "colorData name=" + colorData.name);
-                    mDataBinding.setColorData(colorData);
-                    mDataBinding.tvWithColor.setVisibility(View.VISIBLE);
-                }
+//                if (traditionColorData.isEmpty()){
+//                    mDataBinding.tvWithColor.setVisibility(View.GONE);
+//                }else {
+//                    TraditionColorData colorData = traditionColorData.get(0);
+//                    Log.d("motao", "colorData name=" + colorData.name);
+//                    mDataBinding.setColorData(colorData);
+//                    mDataBinding.tvWithColor.setVisibility(View.VISIBLE);
+//                }
             }
         });
     }

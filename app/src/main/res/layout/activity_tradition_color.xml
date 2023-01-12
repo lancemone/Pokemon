@@ -13,29 +13,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textAppearance="@style/default_text_regular"
-            android:text="中国传统色"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/color_list_recycle"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
+        
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_with_color"
-            android:textAppearance="@style/default_text_regular"
-            android:textColor="@{colorData.colorValue}"
-            android:text="@{colorData.name}"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+            android:id="@+id/color_info_content"
+            app:divider="@drawable/shape_divider_line_white_1dp"
+            app:showDividers="beginning"
+            app:dividerPadding="2dp"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toEndOf="@id/color_list_recycle"
+            app:layout_constraintTop_toTopOf="@id/color_list_recycle">
 
+            <LinearLayout
+                android:layout_width="56dp"
+                android:layout_height="34dp"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="110dp"
+            app:layout_constraintStart_toEndOf="@id/color_info_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+<!--                android:ems="1"  设置每行字数-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="茶色"
+                    android:textColor="@color/default_text_black_color"
+                    android:textSize="16sp"
+                    android:ems="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

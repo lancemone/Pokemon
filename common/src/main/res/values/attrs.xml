@@ -5,6 +5,8 @@
     <attr name="corner_radius" format="dimension" />
     <attr name="border_start_color" format="color"/>
     <attr name="border_end_color" format="color"/>
+    <attr name="division_color" format="color"/>
+    <attr name="division_width" format="dimension"/>
 
     <declare-styleable name="CircleOrFilletImageView">
         <attr name="image_shape" format="enum">
@@ -29,5 +31,12 @@
         <attr name="border_width"/>
         <attr name="border_start_color"/>
         <attr name="border_end_color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SplitterImageView">
+        <attr name="row_count" format="integer"/>
+        <attr name="column_count" format="integer"/>
+        <attr name="division_color"/>
+        <attr name="division_width"/>
     </declare-styleable>
 </resources>
