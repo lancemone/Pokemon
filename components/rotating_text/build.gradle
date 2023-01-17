@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.timothy.resource'
+    namespace 'com.timothy.rotatingtext'
     compileSdk buildVersion.versions.compileSdk.get().toInteger()
 
     defaultConfig {
@@ -12,7 +12,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-        resourceConfigurations += []
     }
 
     buildTypes {
@@ -27,12 +26,4 @@ android {
     }
 }
 
-dependencies {
-
-    implementation libs.androidx.appcompat
-    implementation libs.androidx.appcompat.resources
-    implementation libs.google.material
-    testImplementation libs.test.junit
-    androidTestImplementation libs.test.ext
-    androidTestImplementation libs.test.espresso
-}
+dependencies {}

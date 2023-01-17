@@ -8,9 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
-import java.util.Iterator;
 import java.util.Stack;
-import java.util.function.Consumer;
 
 public class CommonActivityLifecycleCallback implements Application.ActivityLifecycleCallbacks {
 

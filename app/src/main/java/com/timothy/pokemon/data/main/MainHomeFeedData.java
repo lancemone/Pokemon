@@ -1,6 +1,5 @@
 package com.timothy.pokemon.data.main;
 
-import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 

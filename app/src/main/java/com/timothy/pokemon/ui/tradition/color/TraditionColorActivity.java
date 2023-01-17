@@ -1,15 +1,11 @@
 package com.timothy.pokemon.ui.tradition.color;
 
-import android.util.Log;
-import android.view.View;
-
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.timothy.common.arouter.ARouterPath;
 import com.timothy.common.base.BaseMVVMActivity;
-import com.timothy.common.manager.AppManager;
 import com.timothy.pokemon.R;
 import com.timothy.pokemon.data.tradition.TraditionColorData;
 import com.timothy.pokemon.databinding.ActivityTraditionColorBinding;

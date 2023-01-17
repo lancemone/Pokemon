@@ -3,14 +3,9 @@ package com.timothy.common.manager;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.timothy.common.lifecycle.CommonActivityLifecycleCallback;
 
-import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Stack;
 
 public class AppManager{
 

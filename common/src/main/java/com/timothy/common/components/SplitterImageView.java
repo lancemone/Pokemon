@@ -18,9 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.orhanobut.logger.Logger;
+import com.timothy.common.utils.BitmapUtils;
 import com.timothy.common.R;
 import com.timothy.common.constant.LoggerConstant;
-import com.timothy.common.utils.BitmapUtils;
 import com.timothy.common.utils.UIUtils;
 
 public class SplitterImageView extends AppCompatImageView {
