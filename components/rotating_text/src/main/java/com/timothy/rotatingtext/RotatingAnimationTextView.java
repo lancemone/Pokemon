@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -23,9 +24,9 @@ import java.util.TimerTask;
  */
 public class RotatingAnimationTextView extends TextView {
 
+    public static final String HANDLE_THREAD_NAME = "Rotating_Animation_THREAD";
     private Rotatable rotatable;
     private Paint paint;
-    private float density;
     private boolean isRotatableSet = false;
     private Path pathIn, pathOut;
     private Timer updateWordTimer;
@@ -63,7 +64,7 @@ public class RotatingAnimationTextView extends TextView {
 
     private void init(){
         paint = new Paint();
-        density = getContext().getResources().getDisplayMetrics().density;
+//        float density = getContext().getResources().getDisplayMetrics().density;
         paint.setAntiAlias(true);
         paint.setTextSize(rotatable.getSize());
         paint.setColor(rotatable.getColor());
@@ -76,22 +77,21 @@ public class RotatingAnimationTextView extends TextView {
         setText(rotatable.getLargestWordWithSpace());
         currentText = rotatable.getNextWord();
         oldText = currentText;
-        post(new Runnable() {
-            @Override
-            public void run() {
-                pathIn = new Path();
-                pathIn.moveTo(0.0f, getHeight() - paint.getFontMetrics().bottom);
-                pathIn.lineTo(getWidth(), getHeight() - paint.getFontMetrics().bottom);
-                rotatable.setPathIn(pathIn);
+        post(() -> {
+            pathIn = new Path();
+            pathIn.moveTo(0.0f, getHeight() - paint.getFontMetrics().bottom);
+            pathIn.lineTo(getWidth(), getHeight() - paint.getFontMetrics().bottom);
+            rotatable.setPathIn(pathIn);
 
-                pathOut = new Path();
-                pathOut.moveTo(0.0f, (2 * getHeight()) - paint.getFontMetrics().bottom);
-                pathOut.lineTo(getWidth(), (2 * getHeight()) - paint.getFontMetrics().bottom);
-                rotatable.setPathOut(pathOut);
-            }
+            pathOut = new Path();
+            pathOut.moveTo(0.0f, (2 * getHeight()) - paint.getFontMetrics().bottom);
+            pathOut.lineTo(getWidth(), (2 * getHeight()) - paint.getFontMetrics().bottom);
+            rotatable.setPathOut(pathOut);
         });
         if (handler == null){
-            handler = new Handler(Looper.getMainLooper());
+            HandlerThread childThread = new HandlerThread(HANDLE_THREAD_NAME);
+            childThread.start();
+            handler = new Handler(childThread.getLooper());
         }
         handler.postDelayed(mHandlerRun, 1000 / rotatable.getFPS());
         invalidate();
@@ -107,19 +107,16 @@ public class RotatingAnimationTextView extends TextView {
                 return;
             }
             if (context.get() instanceof Activity){
-                ((Activity) context.get()).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (isPaused){
-                            pauseRender();
-                        }else {
-                            animationInterface.setAnimationRunning(true);
-                            resumeRender();
-                            animateInHorizontal();
-                            animateOutHorizontal();
-                            oldText = currentText;
-                            currentText = rotatable.getNextWord();
-                        }
+                ((Activity) context.get()).runOnUiThread(() -> {
+                    if (isPaused){
+                        pauseRender();
+                    }else {
+                        animationInterface.setAnimationRunning(true);
+                        resumeRender();
+                        animateInHorizontal();
+                        animateOutHorizontal();
+                        oldText = currentText;
+                        currentText = rotatable.getNextWord();
                     }
                 });
             }
@@ -171,26 +168,20 @@ public class RotatingAnimationTextView extends TextView {
         ValueAnimator animator;
         if(!rotatable.isApplyHorizontal()) {
             animator = ValueAnimator.ofFloat(0.0f, getHeight());
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    pathIn = new Path();
-                    pathIn.moveTo(0.0f, (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
-                    pathIn.lineTo(getWidth(), (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
-                    rotatable.setPathIn(pathIn);
-                }
+            animator.addUpdateListener(valueAnimator -> {
+                pathIn = new Path();
+                pathIn.moveTo(0.0f, (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
+                pathIn.lineTo(getWidth(), (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
+                rotatable.setPathIn(pathIn);
             });
         }
         else {
             animator = ValueAnimator.ofFloat(-getWidth(),0.0f );
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    pathIn = new Path();
-                    pathIn.moveTo((Float) valueAnimator.getAnimatedValue(), 2*getHeight()/3.0f);
-                    pathIn.lineTo((Float) valueAnimator.getAnimatedValue() + getWidth(), 2*getHeight()/3.0f);
-                    rotatable.setPathIn(pathIn);
-                }
+            animator.addUpdateListener(valueAnimator -> {
+                pathIn = new Path();
+                pathIn.moveTo((Float) valueAnimator.getAnimatedValue(), 2*getHeight()/3.0f);
+                pathIn.lineTo((Float) valueAnimator.getAnimatedValue() + getWidth(), 2*getHeight()/3.0f);
+                rotatable.setPathIn(pathIn);
             });
         }
         animator.addListener(new AnimatorListenerAdapter()
@@ -210,26 +201,20 @@ public class RotatingAnimationTextView extends TextView {
         ValueAnimator animator;
         if(!rotatable.isApplyHorizontal()) {
             animator = ValueAnimator.ofFloat(getHeight(), getHeight() * 2.0f);
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    pathOut = new Path();
-                    pathOut.moveTo(0.0f, (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
-                    pathOut.lineTo(getWidth(), (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
-                    rotatable.setPathOut(pathOut);
-                }
+            animator.addUpdateListener(valueAnimator -> {
+                pathOut = new Path();
+                pathOut.moveTo(0.0f, (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
+                pathOut.lineTo(getWidth(), (Float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom);
+                rotatable.setPathOut(pathOut);
             });
         }
         else {
             animator = ValueAnimator.ofFloat(0.0f,getWidth()+10.0f);
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    pathOut = new Path();
-                    pathOut.moveTo((Float) valueAnimator.getAnimatedValue(), 2*getHeight()/3.0f);
-                    pathOut.lineTo((Float) valueAnimator.getAnimatedValue() + getWidth(), 2*getHeight()/3.0f);
-                    rotatable.setPathOut(pathOut);
-                }
+            animator.addUpdateListener(valueAnimator -> {
+                pathOut = new Path();
+                pathOut.moveTo((Float) valueAnimator.getAnimatedValue(), 2*getHeight()/3.0f);
+                pathOut.lineTo((Float) valueAnimator.getAnimatedValue() + getWidth(), 2*getHeight()/3.0f);
+                rotatable.setPathOut(pathOut);
             });
         }
         animator.setInterpolator(rotatable.getInterpolator());
@@ -244,25 +229,22 @@ public class RotatingAnimationTextView extends TextView {
             yValues[i] = 0.0f;
         }
         ValueAnimator animator = ValueAnimator.ofFloat(0.0f, getHeight());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+        animator.addUpdateListener(valueAnimator -> {
 
-                yValues[0] = (float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom;
-                for (int i = 1; i < stringLength; i++) {
-                    if (valueAnimator.getAnimatedFraction() > (float) i / (float) (stringLength)) {
-                        yValues[i] = (valueAnimator.getAnimatedFraction() - (float) i / (float) (stringLength)) * yValues[0];
-                    }
+            yValues[0] = (float) valueAnimator.getAnimatedValue() - paint.getFontMetrics().bottom;
+            for (int i = 1; i < stringLength; i++) {
+                if (valueAnimator.getAnimatedFraction() > (float) i / (float) (stringLength)) {
+                    yValues[i] = (valueAnimator.getAnimatedFraction() - (float) i / (float) (stringLength)) * yValues[0];
                 }
-
-                pathIn = new Path();
-                pathIn.moveTo(0.0f, yValues[0]);
-                for (int i = 1; i < stringLength; i++) {
-                    pathIn.lineTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
-                    pathIn.moveTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
-                }
-                rotatable.setPathIn(pathIn);
             }
+
+            pathIn = new Path();
+            pathIn.moveTo(0.0f, yValues[0]);
+            for (int i = 1; i < stringLength; i++) {
+                pathIn.lineTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
+                pathIn.moveTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
+            }
+            rotatable.setPathIn(pathIn);
         });
         animator.setInterpolator(rotatable.getInterpolator());
         animator.setDuration(rotatable.getAnimationDuration());
@@ -276,23 +258,20 @@ public class RotatingAnimationTextView extends TextView {
             yValues[i] = getHeight();
         }
         ValueAnimator animator = ValueAnimator.ofFloat(getHeight(), 2 * getHeight());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                yValues[0] = (float) animator.getAnimatedValue() - paint.getFontMetrics().bottom;
-                for (int i = 1; i < stringLength; i++) {
-                    if (animator.getAnimatedFraction() > (float) i / (float) (stringLength)) {
-                        yValues[i] = (animator.getAnimatedFraction() - (float) i / (float) (stringLength)) * yValues[0];
-                    }
+        animator.addUpdateListener(animation -> {
+            yValues[0] = (float) animator.getAnimatedValue() - paint.getFontMetrics().bottom;
+            for (int i = 1; i < stringLength; i++) {
+                if (animator.getAnimatedFraction() > (float) i / (float) (stringLength)) {
+                    yValues[i] = (animator.getAnimatedFraction() - (float) i / (float) (stringLength)) * yValues[0];
                 }
-                pathIn = new Path();
-                pathIn.moveTo(0.0f, yValues[0]);
-                for (int i = 1; i < stringLength; i++) {
-                    pathIn.lineTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
-                    pathIn.moveTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
-                }
-                rotatable.setPathIn(pathIn);
             }
+            pathIn = new Path();
+            pathIn.moveTo(0.0f, yValues[0]);
+            for (int i = 1; i < stringLength; i++) {
+                pathIn.lineTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
+                pathIn.moveTo((getWidth() * ((float) i / (float) stringLength)), yValues[i]);
+            }
+            rotatable.setPathIn(pathIn);
         });
         animator.setInterpolator(rotatable.getInterpolator());
         animator.setDuration(rotatable.getAnimationDuration());
@@ -313,12 +292,7 @@ public class RotatingAnimationTextView extends TextView {
         handler.postDelayed(mHandlerRun, 1000 / rotatable.getFPS());
     }
 
-    private final Runnable mHandlerRun = new Runnable() {
-        @Override
-        public void run() {
-            handlerInvalidate();
-        }
-    };
+    private final Runnable mHandlerRun = this::handlerInvalidate;
 
     private void handlerInvalidate(){
         if (handler != null){
@@ -353,34 +327,36 @@ public class RotatingAnimationTextView extends TextView {
                 return;
             }
             if (context.get() instanceof Activity){
-                ((Activity) context.get()).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (isPaused){
+
+                ((Activity) context.get()).runOnUiThread(() -> {
+                    if (isPaused){
+                        pauseRender();
+                    }else {
+                        if (currentText.equals(rotatable.getInitialWord()) && rotatable.getCycles() != 0) {
+                            rotatable.countCycles(true);
+                        }
+
+                        if (rotatable.countCycles(false) >= rotatable.getCycles()+1 && rotatable.getCycles() != 0) {
+                            rotatable.setCycles(0);
+                            isPaused = true;
                             pauseRender();
                         }else {
-                            if (currentText.equals(rotatable.getInitialWord()) && rotatable.getCycles() != 0) {
-                                rotatable.countCycles(true);
-                            }
-
-                            if (rotatable.countCycles(false) >= rotatable.getCycles()+1 && rotatable.getCycles() != 0) {
-                                rotatable.setCycles(0);
-                                isPaused = true;
-                                pauseRender();
-                            }else {
-                                animationInterface.setAnimationRunning(true);
-                                resumeRender();
-                                animateInHorizontal();
-                                animateOutHorizontal();
-                                oldText = currentText;
-                                currentText = rotatable.getNextWord();
-                            }
+                            animationInterface.setAnimationRunning(true);
+                            resumeRender();
+                            animateInHorizontal();
+                            animateOutHorizontal();
+                            oldText = currentText;
+                            currentText = rotatable.getNextWord();
                         }
                     }
                 });
             }
         }
     };
+
+    private void updateText(){
+
+    }
 
     public boolean isPaused() {
         return isPaused;
