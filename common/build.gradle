@@ -13,11 +13,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments = [AROUTER_MODULE_NAME: project.getName()]
-//            }
-//        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
 
         // 开启 Dex 分包
         multiDexEnabled = true
@@ -41,27 +41,32 @@ android {
 
 dependencies {
 
+    implementation(libs.kotlin.stdlibJdk8.get()){
+        because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        because("解决kotlib 1.6和1.8版本冲突")
+    }
+
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':resource')
-    api libs.bundles.androidx
-    api libs.bundles.lifecycle
-    api libs.coordinatorlayout
-    implementation libs.customview
-    implementation libs.customview.poolingcontainer
+    api libs.bundles.androidx.get()
+    api libs.bundles.lifecycle.get()
+    api libs.coordinatorlayout.get()
+    implementation libs.customview.customview.get()
+    implementation libs.customview.poolingcontainer.get()
 
-    api libs.google.material
-    api libs.google.gson
-    api libs.tencent.mmkv
-    api libs.alibaba.arouter.api
-//    annotationProcessor libs.alibaba.arouter.compiler
-    api libs.glide
-    annotationProcessor libs.glide.compiler
-    api libs.logger
-    api libs.bundles.smartRefresh
-    api libs.loadsir
-    testImplementation libs.test.junit
-    androidTestImplementation libs.test.ext
-    androidTestImplementation libs.test.espresso
+    api libs.google.material.get()
+    api libs.google.gson.get()
+    api libs.tencent.mmkv.get()
+    api libs.alibaba.arouter.api.get()
+    annotationProcessor libs.alibaba.arouter.compiler
+    api libs.glide.glide.get()
+    annotationProcessor libs.glide.compiler.get()
+    api libs.logger.get()
+    api libs.bundles.smartRefresh.get()
+    api libs.loadsir.get()
+    testImplementation libs.test.junit.get()
+    androidTestImplementation libs.test.ext.get()
+    androidTestImplementation libs.test.espresso.get()
 
-    api libs.androidx.multidex
+    api libs.androidx.multidex.get()
 }

@@ -1,4 +1,4 @@
-package com.timothy.common.components.circular_sector_spread;
+package com.timothy.circular_sector_spread;
 
 import android.content.Context;
 import android.util.AttributeSet;

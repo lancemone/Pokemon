@@ -7,6 +7,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 public class ARouterManager {
 
+    public static final String AROUTER_TAG = "P_ARouter";
+
     public static void init(Application application, boolean printLog){
         if (printLog){
             ARouter.openLog();
@@ -16,6 +18,9 @@ public class ARouterManager {
     }
 
     public static void toTraditionColorActivity(Context context){
-        ARouter.getInstance().build(ARouterPath.PATH_TRADITION_COLOR_ACTIVITY).navigation(context);
+        ARouter.getInstance()
+                .build(ARouterPath.PATH_TRADITION_COLOR_ACTIVITY)
+                .withString("name", "p")
+                .navigation(context);
     }
 }

@@ -1,7 +1,6 @@
 package com.timothy.common.base;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -27,7 +26,9 @@ abstract public class BaseActivity<DB extends ViewDataBinding> extends AppCompat
         mDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         mDataBinding.setLifecycleOwner(this);
         initView();
-        if (isNeedToInitLoadsir()){ registerLoadsir(); }
+        if (isNeedToInitLoadsir()) {
+            registerLoadsir();
+        }
     }
 
     @Override
@@ -47,31 +48,27 @@ abstract public class BaseActivity<DB extends ViewDataBinding> extends AppCompat
     /**
      * initView 后调用，默认注册当前页面根布局
      */
-    protected void registerLoadsir(){
-        mLoadService = LoadSir.getDefault().register(mDataBinding.getRoot(), new Callback.OnReloadListener() {
-            @Override
-            public void onReload(View v) {
-                reloadData();
-            }
-        });
+    protected void registerLoadsir() {
+        mLoadService = LoadSir.getDefault().register(mDataBinding.getRoot(), (Callback.OnReloadListener) v -> reloadData());
     }
 
-    protected void beforeOnCreate(){
+    protected void beforeOnCreate() {
         MaterialSharedAxis materialSharedAxis = new MaterialSharedAxis(MaterialSharedAxis.X, true);
         materialSharedAxis.setDuration(ACTIVITY_ANIM_DURATION);
         getWindow().setEnterTransition(materialSharedAxis);
         getWindow().setExitTransition(materialSharedAxis);
     }
 
-    protected void reloadData(){}
+    protected void reloadData() {
+    }
 
-    protected void loadSuccess(){
-        if (mLoadService != null){
+    protected void loadSuccess() {
+        if (mLoadService != null) {
             mLoadService.showSuccess();
         }
     }
 
-    protected boolean isNeedToInitLoadsir(){
-        return true;
+    protected boolean isNeedToInitLoadsir() {
+        return false;
     }
 }

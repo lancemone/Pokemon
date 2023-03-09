@@ -5,7 +5,7 @@ pluginManagement {
         mavenCentral()
     }
 }
-enableFeaturePreview('VERSION_CATALOGS')
+//enableFeaturePreview('VERSION_CATALOGS')
 dependencyResolutionManagement {
     // 配置只能在当前文件配置三方依赖仓库，否则编译异常退出
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -33,3 +33,4 @@ include ':app'
 include ':common'
 include ':resource'
 include ':components:rotating_text'
+include ':components:circular_sector_spread'
