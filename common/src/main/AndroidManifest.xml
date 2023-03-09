@@ -2,4 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.timothy.pokemon">
 
+
+    <application>
+
+        <activity android:name="com.timothy.common.arouter.SchemeFilterActivity"
+            android:exported="true">
+            <intent-filter>
+                <data android:scheme="pokemon"/>
+                <data android:host="*"/>
+                <data android:host="m.timothy.pokemon"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="www.timothy.pokemon"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

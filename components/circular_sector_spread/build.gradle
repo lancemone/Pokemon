@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.timothy.resource'
+    namespace 'com.timothy.circular_sector_spread'
     compileSdk buildVersion.versions.compileSdk.get().toInteger()
 
     defaultConfig {
@@ -12,7 +12,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-        resourceConfigurations += []
     }
 
     buildTypes {
@@ -32,8 +31,4 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.androidx.appcompatResources
     implementation libs.google.material
-    implementation libs.androidx.splashscreen
-    testImplementation libs.test.junit
-    androidTestImplementation libs.test.ext
-    androidTestImplementation libs.test.espresso
 }

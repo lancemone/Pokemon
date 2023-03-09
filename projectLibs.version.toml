@@ -1,10 +1,5 @@
 [versions]
 # 版本号
-constraintlayout-compose = "1.0.1"
-constraintlayout-core = '1.0.4'
-coordinatorlayout = '1.2.0'
-customview = '1.1.0'
-customview-poolingcontainer = '1.0.0'
 # Androidx
 # legacy [版本查询](https://www.wanandroid.com/maven_pom/index?k=androidx.legacy%3Alegacy-support-v4)
 androidx-legacy = "1.0.0"
@@ -41,24 +36,27 @@ geyifeng-immersionbar = "3.2.2"
 [libraries]
 # junit
 test-junit = 'junit:junit:4.13.2'
-test-ext = 'androidx.test.ext:junit:1.1.3'
-test-espresso = 'androidx.test.espresso:espresso-core:3.4.0'
+test-ext = 'androidx.test.ext:junit:1.1.5'
+test-espresso = 'androidx.test.espresso:espresso-core:3.5.1'
 # Logger 日志打印 [Github](https://github.com/orhanobut/logger)
 #orhanobut-logger = {group = ""}
-androidx-appcompat = 'androidx.appcompat:appcompat:1.4.1'
-androidx-appcompat-resources = 'androidx.appcompat:appcompat-resources:1.5.1'
+androidx-appcompat = 'androidx.appcompat:appcompat:1.6.1'
+androidx-appcompatResources = 'androidx.appcompat:appcompat-resources:1.6.1'
 androidx-recyclerview = 'androidx.recyclerview:recyclerview:1.2.1'
-androidx-constraintlayout = 'androidx.constraintlayout:constraintlayout:2.1.3'
-androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
-androidx-constraintlayout-core = { module = "androidx.constraintlayout:constraintlayout-core", version.ref = "constraintlayout-core" }
-androidx-activity = 'androidx.activity:activity:1.6.1'
-androidx-activity-compose = 'androidx.activity:activity-compose:1.6.1'
+androidx-constraintlayout = 'androidx.constraintlayout:constraintlayout:2.1.4'
+androidx-constraintlayoutCompose = 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
+androidx-constraintlayoutCore = 'androidx.constraintlayout:constraintlayout-core:1.0.4'
+androidx-activity= 'androidx.activity:activity:1.6.1'
+androidx-activityCompose = 'androidx.activity:activity-compose:1.6.1'
 androidx-fragment = 'androidx.fragment:fragment:1.5.5'
-androidx-annotation = 'androidx.annotation:annotation:1.5.0'
+androidx-annotation = 'androidx.annotation:annotation:1.6.0'
 
-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
-customview = { module = "androidx.customview:customview", version.ref = "customview" }
-customview-poolingcontainer = { module = "androidx.customview:customview-poolingcontainer", version.ref = "customview-poolingcontainer" }
+
+androidx-splashscreen = 'androidx.core:core-splashscreen:1.0.0'
+
+coordinatorlayout = 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+customview-customview = 'androidx.customview:customview:1.1.0'
+customview-poolingcontainer = 'androidx.customview:customview-poolingcontainer:1.0.0'
 # multidex 分包
 androidx-multidex = 'androidx.multidex:multidex:2.0.1'
 
@@ -75,7 +73,7 @@ lifecycle-process = {module = 'androidx.lifecycle:lifecycle-process', version.re
 lifecycle-reactivestreams = {module = 'androidx.lifecycle:lifecycle-reactivestreams', version.ref = 'androidx-lifecycle'}
 lifecycle-extensions = {module = 'androidx.lifecycle:lifecycle-extensions', version.ref = 'androidx-lifecycle-extensions'}
 
-google-material = 'com.google.android.material:material:1.5.0'
+google-material = 'com.google.android.material:material:1.8.0'
 google-gson = 'com.google.code.gson:gson:2.10'
 # https://github.com/google/flexbox-layout
 google-flexbox = 'com.google.android.flexbox:flexbox:3.0.0'
@@ -88,7 +86,7 @@ alibaba-arouter-compiler = 'com.alibaba:arouter-compiler:1.5.2'
 # Glide [Github](https://github.com/bumptech/glide)
 #implementation 'com.github.bumptech.glide:glide:4.14.2'
 #annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
-glide = 'com.github.bumptech.glide:glide:4.14.2'
+glide-glide = 'com.github.bumptech.glide:glide:4.14.2'
 glide-compiler = 'com.github.bumptech.glide:compiler:4.14.2'
 # Logger 日志打印 [Github](https://github.com/orhanobut/logger)
 logger = 'com.orhanobut:logger:2.2.0'
@@ -97,9 +95,11 @@ smartRefreshKernel = 'io.github.scwang90:refresh-layout-kernel:2.0.5'  # 核心�
 smartRefreshHeader = 'io.github.scwang90:refresh-header-material:2.0.5'
 smartRefreshFooter = 'io.github.scwang90:refresh-footer-classics:2.0.5'
 loadsir = 'com.kingja.loadsir:loadsir:1.3.8'
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8
+kotlin-stdlibJdk8 = 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10'
 
 [bundles]
-androidx = ['androidx-appcompat', 'androidx-appcompat-resources', 'androidx-recyclerview', 'androidx-constraintlayout', 'androidx-constraintlayout-compose', 'androidx-constraintlayout-core', 'androidx-activity', 'androidx-activity-compose',
+androidx = ['androidx-appcompat', 'androidx-appcompatResources', 'androidx-recyclerview', 'androidx-constraintlayout', 'androidx-constraintlayoutCompose', 'androidx-constraintlayoutCore', 'androidx-activity', 'androidx-activityCompose',
 'androidx-fragment', 'androidx-annotation']
 lifecycle = ['lifecycle-compiler', 'lifecycle-common', 'lifecycle-viewmodel', 'lifecycle-livedata', 'lifecycle-compose', 'lifecycle-savedstate', 'lifecycle-runtime',
 'lifecycle-service', 'lifecycle-process', 'lifecycle-reactivestreams', 'lifecycle-extensions']
