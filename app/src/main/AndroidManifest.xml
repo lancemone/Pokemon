@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -16,13 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokemon.NoActionBar"
         tools:targetApi="31">
-
-        <activity android:name=".ui.splash.EntranceActivity"
-            android:theme="@style/Theme.Pokemon.Splash"
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Pokemon.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -30,17 +37,10 @@
                 android:name="android.app.lib_name"
                 android:value="@string/app_name" />
         </activity>
-
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.tradition.color.TraditionColorActivity"
             android:exported="false"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity android:name=".ui.tradition.color.TraditionColorActivity"
-            android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

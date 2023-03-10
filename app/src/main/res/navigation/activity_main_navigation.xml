@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/id_main_activity_navigation"
+    app:startDestination="@id/id_navigation_explore">
+
+    <fragment
+        android:id="@id/id_navigation_explore"
+        android:name="com.timothy.pokemon.ui.main.fragment.MainTechnicalExploreFragment"
+        android:label="@string/title_main_technical_explore"
+        tools:layout="@layout/fragment_main_technical_explore" />
+
+    <fragment
+        android:id="@id/id_navigation_tools"
+        android:name="com.timothy.pokemon.ui.main.fragment.MainToolsFragment"
+        android:label="@string/title_main_tools"
+        tools:layout="@layout/fragment_main_tools" />
+
+    <fragment
+        android:id="@id/id_navigation_view"
+        android:name="com.timothy.pokemon.ui.main.fragment.MainCustomViewFragment"
+        android:label="@string/title_main_custom_view"
+        tools:layout="@layout/fragment_main_custom_view" />
+
+    <fragment
+        android:id="@id/id_navigation_mine"
+        android:name="com.timothy.pokemon.ui.main.fragment.MainMineProfileFragment"
+        android:label="@string/title_main_mine_profile"
+        tools:layout="@layout/fragment_main_mine_profile" />
+</navigation>

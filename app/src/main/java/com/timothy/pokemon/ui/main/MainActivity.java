@@ -1,23 +1,29 @@
 package com.timothy.pokemon.ui.main;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.net.Uri;
-import android.provider.Settings;
-import android.view.View;
+import android.os.Bundle;
+
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.timothy.common.arouter.ARouterManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.timothy.common.arouter.ARouterPath;
 import com.timothy.common.base.BaseActivity;
+import com.timothy.common.report.Report;
+import com.timothy.common.report.ReportActions;
+import com.timothy.common.report.ReportRefer;
 import com.timothy.pokemon.R;
 import com.timothy.pokemon.databinding.ActivityMainBinding;
-import com.timothy.rotatingtext.Rotatable;
-
 
 @Route(path = ARouterPath.PATH_MAIN_ACTIVITY, name = "MainActivity")
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected int getLayoutId() {
@@ -26,28 +32,24 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void initView() {
-        @SuppressLint("HardwareIds")
-        String androidId = Settings.Secure.getString(getContentResolver(), "android_id");
-        mDataBinding.textTime.setText(androidId);
-        mDataBinding.setTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ARouterManager.toTraditionColorActivity(getBaseContext());
-//                Uri uri = Uri.parse("pokemon://m.timothy.pokemon/app/tradition/activity_tradition_color");
-//                ARouter.getInstance().build(uri).navigation();
-            }
+        BottomNavigationView navView = mDataBinding.mainNavView;
+        navView.setOnItemSelectedListener(item -> {
+            Report.Helper.newInstance()
+                    .setAction(ReportActions.ACTION_ITEM_CLICK)
+                    .setActionParam(item.getTitle().toString())
+                    .setRefer(ReportRefer.REFER_MAIN_ACTIVITY)
+                    .build();
+            return true;
         });
-//        mDataBinding.splitterImage.setImageResource(com.timothy.resource.R.mipmap.sample_liutijianbian_1);
-        Rotatable rotatable = new Rotatable(Color.parseColor("#FFA036"), 1000, "Word", "Word01", "Word02");
-        rotatable.setSize(35);
-        rotatable.setAnimationDuration(5000);
-        rotatable.setCenter(true);
-        rotatable.setApplyHorizontal(false);
-        mDataBinding.rotatingView.setContent("This is ?", rotatable);
+
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.id_navigation_explore, R.id.id_navigation_tools, R.id.id_navigation_view, R.id.id_navigation_mine)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.id_activity_fragment_container);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
-    @Override
-    protected boolean isNeedToInitLoadsir() {
-        return false;
-    }
 }

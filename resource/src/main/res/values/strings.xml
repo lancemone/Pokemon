@@ -4,4 +4,13 @@
     <string name="default_empty_data_text">一不小心迷路了，当前没有找到内容 >_&lt;</string>
     <string name="default_network_error_text">此路不通，请检查网络情况后重试^_^</string>
     <string name="loading">加载中…</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_main_technical_explore">探索</string>
+    <string name="title_main_tools">工具</string>
+    <string name="title_main_custom_view">视图</string>
+    <string name="title_main_mine_profile">我的</string>
 </resources>

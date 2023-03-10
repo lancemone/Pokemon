@@ -15,12 +15,12 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
+import com.timothy.common.arouter.ARouterManager;
 import com.timothy.common.loadsir.DefaultEmptyCallback;
 import com.timothy.common.loadsir.DefaultLoadingCallback;
+import com.timothy.common.loadsir.DefaultNetworkErrorCallback;
 import com.timothy.common.manager.AppManager;
 import com.timothy.common.manager.MMKVManager;
-import com.timothy.common.arouter.ARouterManager;
-import com.timothy.common.loadsir.DefaultNetworkErrorCallback;
 import com.timothy.common.sundries.PokemonLogAdapter;
 
 public abstract class BaseApplication extends Application {
@@ -58,7 +58,7 @@ public abstract class BaseApplication extends Application {
         init();
     }
 
-    private void initBase(){
+    private void initBase() {
         Logger.d("Start initBase Options");
         AppManager.getInstance().register(this);
         ARouterManager.init(this, true);

@@ -44,6 +44,8 @@ dependencies {
 
     implementation project(':common')
     implementation project(':components:rotating_text')
+    implementation libs.androidx.navigationFragment
+    implementation libs.androidx.navigationUi
     annotationProcessor libs.alibaba.arouter.compiler
     implementation(libs.androidx.splashscreen)
     testImplementation libs.test.junit

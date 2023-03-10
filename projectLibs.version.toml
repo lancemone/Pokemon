@@ -51,8 +51,9 @@ androidx-activityCompose = 'androidx.activity:activity-compose:1.6.1'
 androidx-fragment = 'androidx.fragment:fragment:1.5.5'
 androidx-annotation = 'androidx.annotation:annotation:1.6.0'
 
-
 androidx-splashscreen = 'androidx.core:core-splashscreen:1.0.0'
+androidx-navigationFragment = 'androidx.navigation:navigation-fragment:2.5.3'
+androidx-navigationUi = 'androidx.navigation:navigation-ui:2.5.3'
 
 coordinatorlayout = 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
 customview-customview = 'androidx.customview:customview:1.1.0'

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="id_activity_container" type="id"/>
+    <item name="id_activity_fragment_container" type="id"/>
+    <item name="id_main_activity_navigation" type="id"/>
+    <item name="id_navigation_explore" type="id"/>
+    <item name="id_navigation_tools" type="id"/>
+    <item name="id_navigation_view" type="id"/>
+    <item name="id_navigation_mine" type="id"/>
+</resources>
